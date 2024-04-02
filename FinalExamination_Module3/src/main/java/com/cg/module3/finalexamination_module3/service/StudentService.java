@@ -124,5 +124,37 @@ public class StudentService {
         }
         return students;
     }
+        public List<Student> searchStudentsByName1(String name) throws SQLException {
+            List<Student> result = new ArrayList<>();
+            for (Student student : result) {
+                if (student.getName().equalsIgnoreCase(name)) {
+                    result.add(student);
+                }
+            }
+            try (Connection connection = DBContext.getConnection();
+                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM Student WHERE name LIKE ?")) {
+                // Set the parameter in the SQL query
+                statement.setString(1, "%" + name + "%");
+                // Execute the query and process the result set
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Student student = new Student();
+                        student.setId(resultSet.getInt("id"));
+                        student.setName(resultSet.getString("name"));
+                        student.setEmail(resultSet.getString("email"));
+                        // Ensure dob is correctly handled based on your Student class and database structure
+                        student.setDob(resultSet.getDate("dob").toLocalDate());
+                        student.setAddress(resultSet.getString("address"));
+                        student.setPhoneNumber(resultSet.getString("phone_number"));
+                        student.setClassroomId(resultSet.getInt("classroom_id"));
+                        // Add the student to the result list
+                        result.add(student);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
 }
 

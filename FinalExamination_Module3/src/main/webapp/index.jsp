@@ -11,6 +11,17 @@
 <body>
 <div class="container">
   <h1>Student Management</h1>
+  <!-- Button to add new student -->
+  <a href="${pageContext.request.contextPath}/add-student" class="btn btn-success">Add New Student</a>
+  <!-- Search form -->
+  <form action="/search-student?name=${student.id}" method="GET">
+    <div class="form-group">
+      <label>
+        <input type="text" class="form-control" name="name" placeholder="Search by Name">
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
   <!-- Table to display students -->
   <table class="table">
     <thead>
@@ -34,22 +45,13 @@
         <td>${student.phoneNumber}</td>
         <td>${student.classroom.name}</td>
         <td>
-          <a href="/update-student?id=${student.id}" class="btn btn-primary">Edit</a>
-          <a href="/delete-student?id=${student.id}" class="btn btn-danger">Delete</a>
+          <a href="${pageContext.request.contextPath}/update-student?id=${student.id}" class="btn btn-primary">Edit</a>
+          <a href="${pageContext.request.contextPath}/delete-student?id=${student.id}" class="btn btn-danger">Delete</a>
         </td>
       </tr>
     </c:forEach>
     </tbody>
   </table>
-  <!-- Button to add new student -->
-  <a href="${pageContext.request.contextPath}/add-student" class="btn btn-success">Add New Student</a>
-  <!-- Search form -->
-  <form action="search.jsp" method="GET">
-    <div class="form-group">
-      <input type="text" class="form-control" name="name" placeholder="Search by Name">
-    </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-  </form>
 </div>
 </body>
 </html>

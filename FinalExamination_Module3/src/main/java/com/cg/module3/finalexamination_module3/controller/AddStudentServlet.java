@@ -17,7 +17,7 @@ import java.util.List;
 @WebServlet(name = "AddStudentServlet",  urlPatterns = "/add-student")
 public class AddStudentServlet extends HttpServlet {
     private final StudentService studentService = new StudentService();
-    private ClassroomService classroomService = new ClassroomService();
+    private final ClassroomService classroomService = new ClassroomService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Classroom> classrooms = classroomService.getAllClassroom();

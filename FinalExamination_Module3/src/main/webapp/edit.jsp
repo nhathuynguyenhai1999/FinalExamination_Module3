@@ -18,7 +18,7 @@
 <body>
 <div class="container">
   <h1>Edit Student</h1>
-  <form action="/update-student?id=${student.id}" method="POST">
+  <form action="${pageContext.request.contextPath}/update-student?id=${student.id}" method="POST">
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" name="name" value="${student.name}">

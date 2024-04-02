@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 @WebServlet(name = "SearchServlet",  urlPatterns = "/search-student")
 public class SearchServlet extends HttpServlet {
@@ -23,6 +24,24 @@ public class SearchServlet extends HttpServlet {
         String name = request2.getParameter("name");
         List<Student> students = studentController.searchStudentsByName(name);
         request2.setAttribute("students",students);
-        request2.getRequestDispatcher("student.jsp").forward(request2,response2);
+        request2.getRequestDispatcher("/students").forward(request2,response2);
+        response2.setContentType("text/html");
+        PrintWriter out = response2.getWriter();
+        out.println("<html><head><title>Search Form</title></head><body>");
+        out.println("<h1>Search Form</h1>");
+        out.println("<form action='search-student?name=' method='post'>");
+        out.println("<input type='text' name='txt'>");
+        out.println("<input type='submit' value='Search'>");
+        out.println("</form>");
+        out.println("</body></html>");
+    }
+    @Override
+    protected void doPost(HttpServletRequest request2, HttpServletResponse response2) throws ServletException,IOException{
+        String name = request2.getParameter("name");
+        if (name!=null&&!name.isEmpty()){
+            System.out.println("Found the searching letter"+name);
+        }else{
+            System.out.println("Cannot found the searching word.");
+        }
     }
 }

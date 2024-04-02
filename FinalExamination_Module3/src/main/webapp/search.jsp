@@ -11,13 +11,15 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Search Results</title>
+    <title>Search Results for ${param.name}</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
     <h1>Search Results</h1>
+    <h2>Results for: <c:out value="${param.name}"/></h2>
+    <!-- Sử dụng thẻ c:out để tránh XSS -->
     <table class="table">
         <thead>
         <tr>
@@ -37,7 +39,7 @@
                 <td>${student.dob}</td>
                 <td>${student.address}</td>
                 <td>${student.phoneNumber}</td>
-                <td>${student.classroom}</td>
+                <td>${student.classroom_id}</td>
             </tr>
         </c:forEach>
         </tbody>
